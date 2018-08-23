@@ -10,9 +10,11 @@ export default class Players extends Component {
     render(){
 
         const players = this.props.players;
-
+        const category = this.props.category;
+        const isActive = this.props.isActivetab;
+      console.log(isActive);
         return (
-        <div id="ATP" className="tab-pane fade show active">
+        <div id={category} className={isActive == "true" ? 'tab-pane fade show active' : 'tab-pane fade show'}>
           <table id="pla-table" className="table table-responsive table-sm pla-table">
             <thead className="table-dark">
               <tr>

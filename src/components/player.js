@@ -18,7 +18,7 @@ export default class Player extends Component{
         const player = this.props.player;
          return (
              <tr >
-             <td><span className="badge-pill badge-primary" data-toggle="modal" data-target="#playerModal" aria-hidden="true">i</span></td>
+             <td><span className="badge-pill badge-primary" data-toggle="modal" data-target={"#playerDetail" + player.id} aria-hidden="true">i</span></td>
              <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.rank}</td>
              <td className={!player.isSelected ? '' : 'select'}>{player.givenName} {player.familyName}</td>
              <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.nationality}</td>

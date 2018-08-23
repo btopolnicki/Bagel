@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import WeekPager from './weekPager';
-import Players from './players';
+import CategoryTabs from './categoryTabs';
 
 const API = 'https://ergast.com/api/f1/2018/last/drivers.json';
 
@@ -13,7 +13,6 @@ export default class App extends Component {
       selectedWeek: 0,
       atpPlayers: [],
       wtaPlayers: [],
-      drivers: [],
       isLoading: false,
       error: null
     }
@@ -43,21 +42,32 @@ export default class App extends Component {
           }
         })
 
-        this.setState({ atpPlayers: atpPlayers, isLoading: false });
+        const wtaPlayers = data.MRData.DriverTable.Drivers.map(player => {
+          return {
+            id: player.driverId,
+            rank: player.permanentNumber,
+            givenName: player.givenName,
+            familyName: player.familyName,
+            nationality: player.nationality,
+            selected: false
+          }
+        })
+
+        this.setState({ atpPlayers: atpPlayers, wtaPlayers: wtaPlayers, isLoading: false });
       })
-      .catch(error => {this.setState({ error, isLoading: false })
-    });
+      .catch(error => {
+        this.setState({ error, isLoading: false })
+      });
   }
 
   render() {
 
-    const { atpPlayers, isLoading, error } = this.state;
+    const { atpPlayers, wtaPlayers, isLoading, error } = this.state;
 
     return (
       <div>
         <WeekPager onSelectedWeekChange={selectedWeek => this.onSelectedWeekChangeh(selectedWeek)} />
-        <Players players={atpPlayers}/>
-        {this.state.selectedWeek}
+        <CategoryTabs atpPlayers={atpPlayers} wtaPlayers={wtaPlayers}/>
       </div>
     );
   }
