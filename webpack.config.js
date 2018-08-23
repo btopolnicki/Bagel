@@ -1,8 +1,8 @@
 module.exports = {
   entry: ['./src/index.js'],
   output: {
-    path: __dirname,
-    publicPath: '/',
+    path: __dirname + '/public',
+    publicPath: './public',
     filename: 'bundle.js'
   },
   module: {
@@ -21,7 +21,10 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './',
+    publicPath: '/',
+    contentBase: './public',
+    watchContentBase: true,
+    port: 9001,
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000

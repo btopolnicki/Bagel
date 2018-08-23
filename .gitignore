@@ -1,8 +1,9 @@
 /node_modules
-bundle.js
+.firebase
 npm-debug.log
 .DS_Store
-
+/public/bundle.js
+/public/bundle.js.map
 # IntelliJ
 *.iml
 /.idea
