@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import WeekPager from './weekPager';
 import CategoryTabs from './categoryTabs';
 
-const API = 'https://ergast.com/api/f1/2018/last/drivers.json';
+const API_ATP = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=atp-rankings%40vbarbaresi&rows=200&sort=-current_rank';
+const API_WTA = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=wta-rankings%40vbarbaresi&rows=200&sort=-current_rank'
 
 export default class App extends Component {
 
@@ -22,7 +23,7 @@ export default class App extends Component {
 
   getPlayers(week) {
 
-    fetch(API) //change to use week and fetch the players
+    fetch(API_ATP) //change to use week and fetch the players
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -31,33 +32,53 @@ export default class App extends Component {
         }
       })
       .then(data => {
-        const atpPlayers = data.MRData.DriverTable.Drivers.map(player => {
+        console.log(data);
+        const atpPlayers = data.records.map(player => {
           return {
-            id: player.driverId,
-            rank: player.permanentNumber,
-            givenName: player.givenName,
-            familyName: player.familyName,
-            nationality: player.nationality,
+            id: player.recordid,
+            rank: player.fields.current_rank,
+            givenName: player.fields.player_name,
+            familyName: '',
+            nationality: player.fields.player_country,
+            points: player.fields.player_points,
             selected: false
           }
         })
-
-        const wtaPlayers = data.MRData.DriverTable.Drivers.map(player => {
-          return {
-            id: player.driverId,
-            rank: player.permanentNumber,
-            givenName: player.givenName,
-            familyName: player.familyName,
-            nationality: player.nationality,
-            selected: false
-          }
-        })
-
-        this.setState({ atpPlayers: atpPlayers, wtaPlayers: wtaPlayers, isLoading: false });
+        this.setState({ atpPlayers: atpPlayers, isLoading: false });
       })
       .catch(error => {
+        console.log(error);
         this.setState({ error, isLoading: false })
       });
+
+      fetch(API_WTA) //change to use week and fetch the players
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong ...');
+        }
+      })
+      .then(data => {
+        console.log(data);
+        const wtaPlayers = data.records.map(player => {
+          return {
+            id: player.recordid,
+            rank: player.fields.current_rank,
+            givenName: player.fields.player_name,
+            familyName: '',
+            nationality: player.fields.player_country,
+            points: player.fields.player_points,
+            selected: false
+          }
+        })
+        this.setState({ wtaPlayers: wtaPlayers, isLoading: false });
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ error, isLoading: false })
+      });
+
   }
 
   render() {

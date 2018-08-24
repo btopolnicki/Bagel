@@ -22,7 +22,7 @@ export default class Player extends Component{
              <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.rank}</td>
              <td className={!player.isSelected ? '' : 'select'}>{player.givenName} {player.familyName}</td>
              <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.nationality}</td>
-             <td className={!player.isSelected ? 'text-center' : 'text-center select'}>2053</td>
+             <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.points}</td>
              <td className={!player.isSelected ? 'text-center' : 'text-center select'}>12.4</td>
              <td><span onClick={event =>{this.handleClick()}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? 'Select' : 'Drop'}</span></td>
            </tr>          
