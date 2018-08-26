@@ -11,6 +11,8 @@ export default class CategoryTabs extends Component {
 
         const atpPlayers = this.props.atpPlayers;
         const wtaPlayers = this.props.wtaPlayers;
+        const atpSelected = this.props.atpSelected;
+        const wtaSelected = this.props.wtaSelected;
 
         return (
             <div className="container">
@@ -21,8 +23,14 @@ export default class CategoryTabs extends Component {
                                 <li className="nav-item active"><a className="nav-link active" data-toggle="pill" href="#ATP">ATP</a></li>
                                 <li className="nav-item"><a className="nav-link" data-toggle="pill" href="#WTA">WTA</a></li>
                             </ul>
-                            <Players players={atpPlayers} category="ATP" isActivetab="true" />
-                            <Players players={wtaPlayers} category="WTA" isActivetab="false" />
+                            <div id="ATP" className='tab-pane fade show active'>
+                                {/* <Players players={atpSelected}/> */}
+                                <Players players={atpPlayers}/>
+                            </div>
+                            <div id="WTA" className='tab-pane fade show'>    
+                                {/* <Players players={wtaSelected}/> */}
+                                <Players players={wtaPlayers}/>
+                            </div>
                         </div>
                     </div>
                 </div>

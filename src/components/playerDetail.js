@@ -20,18 +20,18 @@ export default class PlayerDetails extends Component{
                 </div>
 
                 <div className="modal-body mx-auto">
-                  <span className="bg-alert"><span className="rank">{player.rank}</span> <b>{player.familyName}</b>, {player.givenName}</span><span className="float-right">{player.nationality}</span>
+                  <span className="bg-alert"><span className="rank">{player.rank}</span> <b>{player.name}</b></span><span className="float-right">{player.nationality}</span>
                   <hr />
 
                   <div>
                     <ul className="nav nav-pills details justify-content-center">
-                      <li className="nav-item active"><a className="nav-link active" data-toggle="pill" href="#details">Details</a></li>
-                      <li className="nav-item"><a className="nav-link" data-toggle="pill" href="#history">History</a></li>
+                      <li className="nav-item active"><a className="nav-link active" data-toggle="pill" href={"#details" + player.id}>Details</a></li>
+                      <li className="nav-item"><a className="nav-link" data-toggle="pill" href={"#history" + player.id}>History</a></li>
                     </ul>
 
                     <div className="tab-content">
 
-                      <div id="details" className="tab-pane show fade active">
+                      <div id={"details" + player.id} className="tab-pane show fade active">
                         <table className="table table-responsive details-table">
                           <tbody>
                             <tr>
@@ -44,7 +44,7 @@ export default class PlayerDetails extends Component{
                             </tr>
                             <tr>
                               <th className="col cinfo text-center">Tournaments Played</th>
-                              <td className="col cinfo text-center">12</td>
+                              <td className="col cinfo text-center">12</td> 
                             </tr>
                             <tr>
                               <th className="col cinfo text-center">Average Points</th>
@@ -74,7 +74,7 @@ export default class PlayerDetails extends Component{
                         </table>
                       </div>
 
-                      <div id="history" className="tab-pane fade show">
+                      <div id={"history" + player.id} className="tab-pane fade show">
                         <table id="history-table" className="table table-responsive table-sm history-table">
                           <thead>
                             <tr>
