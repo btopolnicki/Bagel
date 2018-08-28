@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Player from './player'
+import PlayerPoints from './playerPoints'
 
-export default class Players extends Component {
+export default class PlayersPoints extends Component {
   constructor(props) {
     super(props);
 
@@ -18,17 +18,17 @@ export default class Players extends Component {
           <thead className="table-dark">
             <tr>
               <th></th>
-              <th>Rank</th>
+              {/* <th>Rank</th> */}
               <th>Player</th>
               <th className="text-center"></th>
-              {/* <th>Points</th>
-              <th>Form</th> */}
+              { <th>Points</th>
+              /*<th>Form</th> */}
               <th></th>
             </tr>
           </thead>
           <tbody >
             {players.map(player =>
-              <Player onPlayerSelected={selectedPlayerId => this.props.onPlayerSelected(selectedPlayerId)} key={player.id} player={player} />
+              <PlayerPoints key={player.id} player={player} />
             )}
           </tbody>
         </table>

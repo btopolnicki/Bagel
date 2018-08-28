@@ -1,7 +1,7 @@
-
+/* 
 html {
   overflow-y: scroll;
-}
+}*/
 
 button.select {
   margin-top: 2%;
@@ -64,14 +64,14 @@ header.selections {
     -o-background-size: cover;
     }
 
-  @media (min-width: 992px) {
+  /* @media (min-width: 992px) {
     header {
       padding: 156px 0 100px;
       max-width: 1920px;
       max-height: 400px;
     }
-  }
-
+  } 
+  */
 .modal-backdrop.in {
    z-index: -1;
  }
@@ -139,18 +139,18 @@ section {
   padding: 150px 0;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   section {
     padding: 0px;
   }
-}
+} 
 
 .table-responsive
 {
     overflow-x: auto;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   tr, td, thead, th {
     font-size: 10px;
   }
@@ -162,19 +162,29 @@ section {
     max-width: 1920px;
     max-height: 400px;
   }
-
+*/
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-      -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome and Opera */
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+      -khtml-user-select: none; 
+        -moz-user-select: none; 
+                  -ms-user-select: none; 
+            user-select: none; 
   }
 
-}
 
 #main-carousel{
   margin-left: 5px;
+} 
+
+#tab-content{
+  width: 100vw;
+}
+
+.open{
+  color: green;
+}
+
+.closed{
+  color: red;
 }

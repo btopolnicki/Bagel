@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Players from './players';
+import PlayersPoints from './playersPoints';
 import PlayerModal from './playersModal';
+import SelectPlayers from './selectPlayers';
 
 export default class CategoryTabs extends Component {
     constructor(props) {
@@ -11,30 +13,57 @@ export default class CategoryTabs extends Component {
 
         const atpPlayers = this.props.atpPlayers;
         const wtaPlayers = this.props.wtaPlayers;
-        const atpSelected = this.props.atpSelected;
-        const wtaSelected = this.props.wtaSelected;
+        const selectedCategory = this.props.selectedCategory;
+        const week = this.props.week;
 
         return (
             <div className="container">
-                <div className="row">
-                    <div className="mx-auto">
+                {<div className="row">
+                    <div className="" id="tab-content">
                         <div className="tab-content">
                             <ul className="nav nav-pills atpwta justify-content-center">
-                                <li className="nav-item active"><a className="nav-link active" data-toggle="pill" href="#ATP">ATP</a></li>
-                                <li className="nav-item"><a className="nav-link" data-toggle="pill" href="#WTA">WTA</a></li>
+                                <li className={selectedCategory === 'ATP' ? 'nav-item active' : 'nav-item'}><a className={selectedCategory === 'ATP' ? 'nav-link active' : 'nav-link'} data-toggle="pill" href="#ATP" onClick={event => this.props.onSelectedCategoryChange('ATP')}>ATP</a></li>
+                                <li className={selectedCategory === 'WTA' ? 'nav-item active' : 'nav-item'}><a className={selectedCategory === 'WTA' ? 'nav-link active' : 'nav-link'} data-toggle="pill" href="#WTA" onClick={event => this.props.onSelectedCategoryChange('WTA')}>WTA</a></li>
                             </ul>
-                            <div id="ATP" className='tab-pane fade show active'>
-                                {/* <Players players={atpSelected}/> */}
-                                <Players players={atpPlayers}/>
+                            <div id="ATP" className={selectedCategory === 'ATP' ? 'tab-pane fade show active center' : 'tab-pane fade show center'}>
+                                <ul title="Tournaments">
+                                    {week.atpTournaments.map(tour => <li key={tour.name}>{tour.name}</li>)}
+                                </ul>
+
+                                {week.isOpen &&
+                                    <div>
+                                        <SelectPlayers players={week.selectedPlayers.atpSelected} />
+                                        <Players onPlayerSelected={selectedPlayerId => this.props.onPlayerSelected(selectedPlayerId)} players={atpPlayers} />
+                                    </div>
+                                }
+                                {!week.isOpen &&
+                                    <div>
+                                        <PlayersPoints players={week.selectedPlayers.atpSelected} />
+                                    </div>
+                                }
+
                             </div>
-                            <div id="WTA" className='tab-pane fade show'>    
-                                {/* <Players players={wtaSelected}/> */}
-                                <Players players={wtaPlayers}/>
+                            <div id="WTA" className={selectedCategory === 'WTA' ? 'tab-pane fade show active center' : 'tab-pane fade show center'}>
+                                <ul title="Tournaments">
+                                    {week.wtaTournaments.map(tour => <li key={tour.name}>{tour.name}</li>)}
+                                </ul>
+                                {week.isOpen &&
+                                    <div>
+                                        <SelectPlayers players={week.selectedPlayers.wtaSelected} />
+                                        <Players onPlayerSelected={selectedPlayerId => this.props.onPlayerSelected(selectedPlayerId)} players={wtaPlayers} />
+                                    </div>
+                                }
+                                {!week.isOpen &&
+                                    <div>
+                                        <PlayersPoints players={week.selectedPlayers.wtaSelected} />
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
-                </div>
-                <PlayerModal players={atpPlayers}/>
+                </div>}
+
+                <PlayerModal players={atpPlayers} />
             </div>
         )
     }
