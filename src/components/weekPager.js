@@ -42,8 +42,8 @@ export default class WeekPager extends Component {
                             <a className="page-link" href="#" data-target="#main-carousel1" data-slide="prev" onClick={event => this.onPreviousWeekClick()}>Previous</a>
                         </li>
                         <li className="page-item flex-fill">
-                            <div id="main-carousel" class="carousel slide" data-interval="false" data-wrap="false">
-                                <div class="carousel-inner">
+                            <div id="main-carousel" className="carousel slide main-carousel" data-interval="false" data-wrap="false">
+                                <div className="carousel-inner">
                                     {weeks.weeks.map(week =>
                                         <div key={week.week}  className={this.isSelectedWeek(weeks, week.week, selectedWeek) ? 'carousel-item active' : 'carousel-item'}>
                                             <div>Week {week.week} <span className={week.isOpen ? 'open' : 'closed'}>{week.isOpen ? '(Open)' : '(Closed)'}</span></div>

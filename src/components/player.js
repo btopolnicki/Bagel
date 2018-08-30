@@ -8,7 +8,13 @@ export default class Player extends Component{
     }
 
     handleClick(){
-        this.props.onPlayerSelected(this.props.player)
+        if (this.props.player.isSelected){
+            this.props.onPlayerDropped(this.props.player)
+        }else{
+            this.props.onPlayerSelected(this.props.player)
+        }
+        
+        
         // this.props.player.isSelected = !this.props.player.isSelected;
         // this.setState({player:this.props.player});
         // //HttpRequest to update the selecction in the database

@@ -28,7 +28,7 @@ export default class Players extends Component {
           </thead>
           <tbody >
             {players.map(player =>
-              <Player onPlayerSelected={selectedPlayerId => this.props.onPlayerSelected(selectedPlayerId)} key={player.id} player={player} />
+              <Player onPlayerSelected={selectedPlayerId => this.props.onPlayerSelected(selectedPlayerId)} key={player.id} onPlayerDropped={selectedPlayerId => this.props.onPlayerDropped(selectedPlayerId)} player={player} />
             )}
           </tbody>
         </table>

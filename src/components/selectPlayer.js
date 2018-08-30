@@ -8,7 +8,7 @@ export default class SelectPlayer extends Component{
     }
 
     handleClick(){
-        this.props.onPlayerSelected(this.props.player)
+        this.props.onPlayerDropped(this.props.player)
         // this.props.player.isSelected = !this.props.player.isSelected;
         // this.setState({player:this.props.player});
         // //HttpRequest to update the selecction in the database
@@ -24,9 +24,7 @@ export default class SelectPlayer extends Component{
              <td className= 'text-center'>{player.rank}</td>
              <td className=''>{player.name}</td>
              <td className='text-center'><span class={"flag-icon flag-icon-"+player.isoCountry}></span></td>
-             {/* <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.points}</td> */}
-             {/* <td className={!player.isSelected ? 'text-center' : 'text-center select'}>12.4</td> */}
-             <td><span onClick={event =>{this.handleClick()}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? '' : 'Drop'}</span></td>
+              <td><span onClick={event =>{this.handleClick()}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? '' : 'Drop'}</span></td> 
            </tr>          
         )
     }
