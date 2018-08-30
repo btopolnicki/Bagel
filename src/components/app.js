@@ -7,6 +7,7 @@ import { auth } from '../firebase';
 const RANKING_URL = 'https://us-central1-bagel-c756a.cloudfunctions.net/api/rankings/';
 const SELECTED_URL = 'https://us-central1-bagel-c756a.cloudfunctions.net/api/selected/';
 const WEEKSDATA = 'https://us-central1-bagel-c756a.cloudfunctions.net/api/tournaments/weeks/';
+//const WEEKSDATA = 'http://localhost:5000/bagel-c756a/us-central1/api//tournaments/weeks/'
 
 
 
@@ -31,19 +32,41 @@ export default class App extends Component {
 
   componentDidMount() {
 
-    auth.onAuthStateChanged(authUser => {
-      console.log(authUser);
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null });
-    });
+    try {
 
-    this.getWeeksData();
+      auth.onAuthStateChanged(authUser => {
+        console.log(authUser);
+        authUser
+          ? this.setState({ authUser })
+          : this.setState({ authUser: null });
+      });
+
+
+      Promise.all([this.getWeeksData(), this.getPlayers()]).then((data) => {
+        const weeksData = data[0];
+        const players = data[1];
+
+        this.setState({ atpPlayers: players.atpPlayers, wtaPlayers: players.wtaPlayers, weeks: weeksData.weeks, selectedWeek: weeksData.selectedWeek, isLoading: false })
+      })
+        .catch(error => {
+          console.log(error);
+          this.setState({ error, isLoading: false })
+        });;
+
+    } catch (error) {
+      this.setState({ error, isLoading: false })
+    }
+
+
   }
 
   render() {
 
     const { atpPlayers, wtaPlayers, atpSelected, wtaSelected, weeks, isLoading, selectedCategory, selectedWeek, error } = this.state;
+
+    if (error) {
+      return { error };
+    }
     if (isLoading) {
       return "Loading...";
     }
@@ -53,11 +76,13 @@ export default class App extends Component {
 
     return (
       <div>
-        <Navigation/>
+        <Navigation />
+        <div className="container">
         <WeekPager onSelectedWeekChange={selectedWeek => this.onSelectedWeekChangeh(selectedWeek)} weeks={weeks} selectedWeek={selectedWeek} />
         <CategoryTabs selectedCategory={selectedCategory} week={weeks.weeks[selectedWeek]} atpPlayers={atpPlayers} wtaPlayers={wtaPlayers} onSelectedCategoryChange={selectedCategory => this.onSelectedCategoryChangeh(selectedCategory)}
           onPlayerSelected={selectedPlayerId => this.onPlayerSelected(selectedPlayerId)}
           onPlayerDropped={selectedPlayerId => this.onPlayerDropped(selectedPlayerId)} />
+      </div>
       </div>
     );
   }
@@ -75,7 +100,7 @@ export default class App extends Component {
 
   getWeeksData() {
 
-    fetch(WEEKSDATA) //change to use week and fetch the players
+    return fetch(WEEKSDATA) //change to use week and fetch the players
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -86,15 +111,8 @@ export default class App extends Component {
       .then(data => {
         const weeks = data.weeks;
         const selectedWeek = this.getCurrentWeek(weeks);
-        console.log(weeks);
         return { weeks, selectedWeek };
-      }).then(dataG => {
-        return this.getPlayers().then((data) => {
-          console.log("seleddede " + dataG.selectedWeek);
-          return this.setState({ atpPlayers: data.atpPlayers, wtaPlayers: data.wtaPlayers, weeks: dataG.weeks, selectedWeek: dataG.selectedWeek, isLoading: false })
-        });
       })
-
       .catch(error => {
         console.log(error);
         this.setState({ error, isLoading: false })
@@ -143,7 +161,6 @@ export default class App extends Component {
         })
 
         return ({ atpPlayers: atpPlayers, wtaPlayers: wtaPlayers });
-        //this.setState({ atpPlayers: atpPlayers, wtaPlayers: wtaPlayers, weeks: this.state.weeks, selectedWeek: this.state.selectedWeek, isLoading: false });
       })
       .catch(error => {
         console.log(error);
@@ -174,28 +191,22 @@ export default class App extends Component {
   }
 
   onPlayerDropped(player) {
-    console.log("state:");
+
     console.log(this.state);
-    console.log("Selected: " + this.state.weeks.weeks[this.state.selectedWeek].selectedPlayers.length);
     const index = this.findPlayerIndex(this.state.weeks.weeks[this.state.selectedWeek].selectedPlayers, player);
 
     this.state.weeks.weeks[this.state.selectedWeek].selectedPlayers.splice(index, 1);
-    console.log("player dropred");
-    console.log("Selectesssssd: " + this.state.weeks.weeks[this.state.selectedWeek].selectedPlayers.length);
 
     player.isSelected = false;
     this.setState({ weeks: this.state.weeks });
-    console.log("Player dropped " + player.id);
   }
 
   findPlayerIndex(players, player) {
     for (let c = 0; c < players.length; c++) {
       if (players[c].id == player.id) {
-        console.log('found ' + c);
         return c;
       }
     }
-
     return 100;
   }
 }
