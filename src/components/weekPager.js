@@ -5,7 +5,6 @@ export default class WeekPager extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {selectedWeek:props.selectedWeek};
     }
 
 
@@ -26,7 +25,7 @@ export default class WeekPager extends Component {
         return month[monthInput];
     }
     render() {
-
+        console.log("render week pager");
         const weeks = this.props.weeks;
         const selectedWeek = this.props.selectedWeek;
         console.log('seleted week: ' + selectedWeek);
@@ -39,7 +38,7 @@ export default class WeekPager extends Component {
                 <nav aria-label="Page navigation example">
                     <ul className="pagination  justify-content-between">
                         <li className="page-item ">
-                            <a className="page-link" href="#" data-target="#main-carousel1" data-slide="prev" onClick={event => this.onPreviousWeekClick()}>Previous</a>
+                            <a className="page-link" href="#" data-target="#main-carousel1" data-slide="prev" onClick={event => this.onPreviousWeekClick(event)}>Previous</a>
                         </li>
                         <li className="page-item flex-fill">
                             <div id="main-carousel" className="carousel slide main-carousel" data-interval="false" data-wrap="false">
@@ -54,7 +53,7 @@ export default class WeekPager extends Component {
                             </div>
                         </li>
                         <li className="page-item">
-                            <a className="page-link" href="#" data-target="#main-carousel1" data-slide="next" onClick={event => this.onNextWeekClick()}>Next</a>
+                            <a className="page-link" href="#" data-target="#main-carousel1" data-slide="next" onClick={event => this.onNextWeekClick(event)}>Next</a>
                         </li>
                     </ul>
                 </nav>
@@ -66,19 +65,20 @@ export default class WeekPager extends Component {
         return weeks.weeks[selectedWeek].week == week;
 
     }
-    onNextWeekClick() {
+    onNextWeekClick(event) {
+        event.preventDefault();
+        console.log("WEEK PAGER - NEXT clicked")
         const week = this.props.selectedWeek >= this.props.weeks.weeks.length -1? this.props.selectedWeek : this.props.selectedWeek + 1;
         if (week !== this.props.selectedWeek){
-           // this.setState({ selectedWeek: week });
             this.props.onSelectedWeekChange(week);
         }
 
     }
 
-    onPreviousWeekClick() {
+    onPreviousWeekClick(event) {
+        event.preventDefault();
         const week = this.props.selectedWeek <= 0 ? 0 : this.props.selectedWeek - 1;
         if (week !== this.props.selectedWeek){
-           // this.setState({ selectedWeek: week });
             this.props.onSelectedWeekChange(week);
         }
     }

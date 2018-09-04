@@ -69,7 +69,7 @@ export default class CategoryTabs extends Component {
 
                 {/* {!week.isOpen && isFuture && <div id="counter"><h6 class="alert-heading">Opens in: <Countdown date={new Date(week.start_date)} /></h6></div>}                 */}
 
-                <PlayerModal players={atpPlayers} />
+                <PlayerModal players={atpPlayers} /> 
 
             </div>
         )
@@ -80,11 +80,11 @@ export default class CategoryTabs extends Component {
     setSelectedPlayers(ranking, selectedP, category) {
 
         for (const player of ranking) {
-            console.log(selectedP.filter(p => p.id === player.id && player.category === category).length);
+            
             if (selectedP.filter(p => p.id === player.id && player.category === category).length > 0) {
                 
                 player.isSelected = true;
-                console.log(player);
+               
             } else {
                 player.isSelected = false;
             }

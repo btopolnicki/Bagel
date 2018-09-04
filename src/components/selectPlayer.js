@@ -7,7 +7,8 @@ export default class SelectPlayer extends Component{
         this.state = {};
     }
 
-    handleClick(){
+    handleClick(event){
+        event.preventDefault();
         this.props.onPlayerDropped(this.props.player)
         // this.props.player.isSelected = !this.props.player.isSelected;
         // this.setState({player:this.props.player});
@@ -24,7 +25,7 @@ export default class SelectPlayer extends Component{
              <td className= 'text-center'>{player.rank}</td>
              <td className=''>{player.name}</td>
              <td className='text-center'><span class={"flag-icon flag-icon-"+player.isoCountry}></span></td>
-              <td><span onClick={event =>{this.handleClick()}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? '' : 'Drop'}</span></td> 
+              <td><span onClick={event =>{this.handleClick(event)}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? '' : 'Drop'}</span></td> 
            </tr>          
         )
     }

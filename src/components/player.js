@@ -7,7 +7,9 @@ export default class Player extends Component{
         this.state = {};
     }
 
-    handleClick(){
+    handleClick(event){
+        event.preventDefault();
+
         if (this.props.player.isSelected){
             this.props.onPlayerDropped(this.props.player)
         }else{
@@ -32,7 +34,7 @@ export default class Player extends Component{
              <td className={!player.isSelected ? 'text-center' : 'text-center select'}><span class={"flag-icon flag-icon-"+player.isoCountry}></span></td>
              {/* <td className={!player.isSelected ? 'text-center' : 'text-center select'}>{player.points}</td> */}
              {/* <td className={!player.isSelected ? 'text-center' : 'text-center select'}>12.4</td> */}
-             <td><span onClick={event =>{this.handleClick()}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? 'Select' : 'Drop'}</span></td>
+             <td><span onClick={event =>{this.handleClick(event)}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? 'Select' : 'Drop'}</span></td>
            </tr>          
         )
     }
