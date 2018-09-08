@@ -10,11 +10,12 @@ export default class PlayersPoints extends Component {
   render() {
 
     const players = this.props.players;
-    const isActive = this.props.isActivetab;
-    console.log(isActive);
+        const isActive = this.props.isActivetab;
+    console.log(players);
+    console.log(players[0]);
     return (
       <div className="table table-responsive"> 
-        <table id="pla-table" class="table table-sm">
+        <table id="pla-table" className="table table-sm">
           <thead className="table-dark">
             <tr>
               <th></th>
@@ -32,6 +33,8 @@ export default class PlayersPoints extends Component {
             )}
           </tbody>
         </table>
+
+        {players.length==0 && <h4 className="text-center">No players selected.</h4>}
       </div>
     )
   }

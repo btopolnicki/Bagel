@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './login';
 import SignUp from './signUp';
 import Home from './home';
+import SignOut from './signOut';
+import LeaderBoard from './leaderBoard';
 
 export default class Main extends Component {
 
@@ -13,8 +15,10 @@ export default class Main extends Component {
     render() {
         return (
             <Switch>
-                <Route path="/login" component={Login} />
-                <Route path="/signUp" component={SignUp} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signUp" component={SignUp} />
+                <Route exact path="/signOut" component = {SignOut}/>
+                <Route exact path="/leaderBoard" component = {LeaderBoard}/>
                 <Route path="/" component={Home} />
             </Switch>
         )

@@ -14,7 +14,7 @@ export default class Players extends Component {
     console.log(isActive);
     return (
       <div className="table table-responsive"> 
-        <table id="pla-table" class="table table-sm">
+        <table id="pla-table" className="table table-sm">
           <thead className="table-dark">
             <tr>
               <th></th>

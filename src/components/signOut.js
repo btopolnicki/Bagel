@@ -1,13 +1,14 @@
-import React from 'react';
+//<button  type="button" onClick={auth.doSignOut}> Sign Out </button>
 
-import { auth } from '../firebase';
+import React, { Component } from 'react';
+import * as auth from '../auth';
 
-const SignOutButton = () =>
-  <button
-    type="button"
-    onClick={auth().doSignOut}
-  >
-    Sign Out
-  </button>
+const SignOut = () => (
+            <div>
+                <h1>Signout</h1>
+                <button  type="button" onClick={event=> {auth.doSignOut()}}> Sign Out </button>
+            </div>
+        )
 
-export default SignOutButton;
+
+export default SignOut;

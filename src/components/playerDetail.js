@@ -7,9 +7,10 @@ export default class PlayerDetails extends Component{
 
     render(){
         const player = this.props.player;
+        const category = this.props.category;
 
         return (
-            <div key={player.id} className="modal fade" id={"playerDetail" + player.id} tabIndex="-1" role="dialog" aria-labelledby={"playerDetail" + player.id} aria-hidden="true">
+            <div key={player.id} className="modal fade" id={"playerDetail" + category + player.id} tabIndex="-1" role="dialog" aria-labelledby={"playerDetail" + player.id} aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
               <div className="modal-content">
                 <div className="modal-header bg-success">

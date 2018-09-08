@@ -22,7 +22,8 @@ export default class SelectPlayers extends Component {
                     nationality: players[c].nationality,
                     points: "",
                     isoCountry: players[c].isoCountry,
-                    isSelected: true
+                    isSelected: true,
+                    category:players[c].category
                 });
             } else {
                 newPlayers.push({
@@ -50,7 +51,7 @@ export default class SelectPlayers extends Component {
         return (
             <div>
                 <div className="table table-responsive">
-                    <table id="pla-table" class="table table-sm">
+                    <table id="pla-table" className="table table-sm">
                         <thead className="table-dark">
                             <tr>
                                 <th></th>
@@ -70,7 +71,7 @@ export default class SelectPlayers extends Component {
                         </tbody>
                     </table>
                 </div>
-                <button type="button" data-toggle="modal" data-target={"#selectPlayersModal"}  class="btn btn-primary btn-sm btn-block">Select players</button>
+                <button type="button" data-toggle="modal" data-target={"#selectPlayersModal"}  className="btn btn-primary btn-sm btn-block">Select players</button>
             </div>
         )
     }

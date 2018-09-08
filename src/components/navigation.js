@@ -18,7 +18,6 @@ export default class Navigation extends Component{
           if (authUser) {
             this.setState({ authUser })
             console.log("user:" + authUser);
-            this.fetchData();
     
           } else {
             this.setState({ authUser: null, isLoading:false });
@@ -43,17 +42,18 @@ export default class Navigation extends Component{
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 { authUser && 
                     <ul className="navbar-nav mr-auto">
-                        
+                         <li className="nav-item">
+                        <NavLink className="nav-link" to="/">{"Wellcome " + authUser.displayName}</NavLink>
+                        </li>
                         <li className="nav-item active">
-                            <Link className="nav-link" to="/">Your picks <span className="sr-only">(current)</span></Link>
+                            <NavLink className="nav-link" to="/">Your picks <span className="sr-only">(current)</span></NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/leaderBoard">Leaderboard <span className="sr-only">(current)</span></Link>
+                            <NavLink className="nav-link" to="/leaderBoard">Leaderboard <span className="sr-only">(current)</span></NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/logout">Logout <span className="sr-only">(current)</span></Link>
-                        </li>
-                    
+                            <NavLink className="nav-link" to="/signOut">Sign out</NavLink>
+                        </li>                    
                     </ul>
                 }
                    { !authUser &&   
@@ -66,10 +66,8 @@ export default class Navigation extends Component{
                             <NavLink className="nav-link" to="/signUp">Sign up</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/logIn">Forgot password <span className="sr-only">(current)</span></NavLink
-                            >
-                        </li>
-                    
+                            <NavLink className="nav-link" to="/logIn">Forgot password <span className="sr-only">(current)</span></NavLink>
+                        </li>                    
                     </ul>
                 }
 

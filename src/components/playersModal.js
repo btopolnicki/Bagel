@@ -11,9 +11,10 @@ export default class PlayersModal extends Component{
     render(){
        
         const players = this.props.players;
+        const category = this.props.category
          return (
              players.map(player=>
-                <PlayerDetails key={player.id} player={player}/>         )       
+                <PlayerDetails key={player.id} player={player} category={category}/>         )       
         )
     }
 }

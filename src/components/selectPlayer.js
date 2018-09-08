@@ -21,10 +21,10 @@ export default class SelectPlayer extends Component{
         const player = this.props.player;
          return (
              <tr >
-             <td> {player.isSelected && <span className="badge-pill badge-primary" data-toggle="modal" data-target={"#playerDetail" + player.id} aria-hidden="true">{!player.isSelected ? '' : 'i'}</span>}</td>
+             <td> {player.isSelected && <span className="badge-pill badge-primary" data-toggle="modal" data-target={"#playerDetail" + player.category + player.id} aria-hidden="true">{!player.isSelected ? '' : 'i'}</span>}</td>
              <td className= 'text-center'>{player.rank}</td>
              <td className=''>{player.name}</td>
-             <td className='text-center'><span class={"flag-icon flag-icon-"+player.isoCountry}></span></td>
+             <td className='text-center'><span className={player.isoCountry !="" ? "flag-icon flag-icon-"+player.isoCountry : ''}></span></td>
               <td><span onClick={event =>{this.handleClick(event)}} className={!player.isSelected ? 'badge badge-success noselect' : 'badge badge-secondary noselect'}>{!player.isSelected ? '' : 'Drop'}</span></td> 
            </tr>          
         )

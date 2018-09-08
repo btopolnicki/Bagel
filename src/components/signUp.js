@@ -33,10 +33,10 @@ class SignUpPage extends Component {
       history,
     } = this.props;
 
-    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne, username)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        history.push('/');
+       history.push('/');
       })
       .catch(error => {
         this.setState(byPropKey('error', error));

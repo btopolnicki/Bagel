@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "webpack-dev-server --config ./webpack.config.dev.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
@@ -22,6 +22,8 @@
   "dependencies": {
     "babel-preset-stage-1": "^6.1.18",
     "firebase": "^5.4.1",
+    "html-webpack-harddisk-plugin": "^0.2.0",
+    "html-webpack-plugin": "^3.2.0",
     "jquery-countdown": "^2.2.0",
     "lodash": "^4.17.5",
     "react": "16.3.2",
