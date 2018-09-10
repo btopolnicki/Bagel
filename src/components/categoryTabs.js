@@ -6,6 +6,7 @@ import SelectPlayers from './selectPlayers';
 import SelectPlayersModal from './selectPlayersModal';
 import Countdown from 'react-countdown-now';
 import WeekResults from './results';
+import Tournaments from './tournaments';
 
 export default class CategoryTabs extends Component {
     constructor(props) {
@@ -69,8 +70,9 @@ export default class CategoryTabs extends Component {
                 }
 
                 {!week.isOpen && isFuture && <div id="counter"><h6 class="alert-heading">Opens in: <Countdown date={new Date(week.openDate)} /></h6></div>} 
-                {!week.isOpen && !isFuture && <WeekResults week={week.week} selectedWeek={week.week}/>}                               
-
+                {(!isFuture) &&  (<div><h3>Results</h3>  <WeekResults week={week.week} selectedWeek={week.week}/></div>)}                               
+                {week.isOpen && <Tournaments selectedWeek={week.week}/>}
+                {/* {week.isOpen &&  (<div><h3>Order of play</h3>  <WeekResults week={week.week} selectedWeek={week.week}/></div>)}                                */}
                 <PlayerModal players={atpPlayers} category="atp"/> 
                 <PlayerModal players={wtaPlayers} category="wta"/> 
 
